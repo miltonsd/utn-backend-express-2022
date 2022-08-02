@@ -71,18 +71,32 @@
         <div class="container">
           <h4>Lista de usuarios</h4>
           <div class="row">
-            <% usuario.forEach(element=> { %>
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <div class="card-body">
-                  <p class="card-text"><%= element.nombre %></p>
-                  <a class="btn btn-primary" href="/edit/<%= element.nombre %>">
-                    Editar
-                  </a>
-                </div>
-              </div>
-            </div>
-            <% }); %>
+            <table class="table table-responsive table-hover">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% usuario.forEach(element=> { %>
+                <tr>
+                  <td><%= element.id %></td>
+                  <td><%= element.nombre %></td>
+                  <td>
+                    <a
+                      class="btn btn-primary"
+                      href="/show/<%= element.nombre %>"
+                    >
+                      Ver detalles
+                    </a>
+                    <a class="btn btn-danger" href="">Eliminar</a>
+                  </td>
+                </tr>
+                <% }); %>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

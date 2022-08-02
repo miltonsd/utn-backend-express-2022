@@ -7,7 +7,6 @@ const { json } = require("body-parser");
 
 // Requerir router
 const router = require("./routes/index.routes");
-const routerApi = require("./routes/api.routes");
 
 // Set EJS (view engine)
 app.set("view engine", "ejs");
@@ -21,7 +20,6 @@ app.use(json());
 
 // Rutas
 app.use("/", router);
-app.use("/api", routerApi);
 
 app.use((req, res, next) => {
   res.status(404).json({

@@ -8,9 +8,12 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico" />
+    <link
+      rel="icon"
+      href="https://cdn-icons-png.flaticon.com/512/5968/5968322.png"
+    />
 
-    <title>Agregar usuario</title>
+    <title>Editar usuario</title>
 
     <link
       rel="canonical"
@@ -34,7 +37,7 @@
             <div class="col-sm-4 offset-md-1 py-4">
               <ul class="list-unstyled">
                 <li><a href="/" class="text-white">Home</a></li>
-                <li><a href="#" class="text-white">Create</a></li>
+                <li><a href="/create" class="text-white">Create</a></li>
               </ul>
             </div>
           </div>
@@ -43,7 +46,7 @@
       <div class="navbar navbar-dark bg-dark box-shadow">
         <div class="container d-flex justify-content-between">
           <a href="#" class="navbar-brand d-flex align-items-center">
-            <strong>Crear usuario</strong>
+            <strong>Editar usuario</strong>
           </a>
           <button
             class="navbar-toggler"
@@ -74,16 +77,12 @@
               <input
                 type="text"
                 class="form-control"
-                name="nombre"
-                id="nombre"
-                value=""
-                required
+                value="<%= nombre %>"
+                readonly
               />
             </div>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" id="boton">
-                Enviar
-              </button>
+              <a href="/edit/<%= nombre %> " class="btn btn-primary">Editar</a>
             </div>
           </form>
         </div>
@@ -113,7 +112,7 @@
 
       const store = async (nombre) => {
         try {
-          const request = await fetch("http://localhost:3000/store", {
+          const request = await fetch("http://localhost:3000/api/store", {
             method: "POST",
             body: JSON.stringify({
               nombre,
@@ -129,7 +128,6 @@
         }
       };
     </script>
-
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
