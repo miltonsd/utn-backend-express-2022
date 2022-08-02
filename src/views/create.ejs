@@ -103,8 +103,8 @@
 
         const data = await store(nombre);
         console.log(data);
-        if (data) {
-          alert(data.params.nombre + " agregado correctamente");
+        if (data.status == 200) {
+          alert(data.nombre + " " + data.msg);
           window.location.href = "/";
         } else {
           alert(data.error[0].msg);

@@ -15,9 +15,9 @@ router.get("/", index);
 
 router.get("/create", create);
 
-router.get("/show/:nombre", show);
+router.get("/show/:id", show);
 
-router.get("/edit/:nombre", edit);
+router.get("/edit/:id", edit);
 
 // API
 

@@ -18,13 +18,15 @@ const index = async (req, res) => {
 };
 
 const show = async (req, res) => {
-  const nombre = req.params.nombre;
-  return res.render("../src/views/show", { nombre });
+  const id = req.params.id;
+  const elemento = usuario[id];
+  return res.render("../src/views/show", { elemento });
 };
 
 const edit = async (req, res) => {
-  const nombre = req.params.nombre;
-  return res.render("../src/views/edit", { nombre });
+  const id = req.params.id;
+  const elemento = usuario[id];
+  return res.render("../src/views/edit", { elemento });
 };
 
 const create = async (req, res) => {
@@ -37,7 +39,9 @@ const store = async (req, res) => {
   const { nombre, id } = req.body;
   if (nombre) {
     usuario.unshift({ id, nombre });
-    return res.status(200).json({ id, nombre, msg: "Creado correctamente" });
+    return res
+      .status(200)
+      .json({ status: 200, id, nombre, msg: "Creado correctamente" });
   } else {
     return res.status(404).json({ msg: "No se recibieron los datos" });
   }
@@ -48,7 +52,9 @@ const update = async (req, res) => {
   const id = req.params.id;
   if (id) {
     const actualizado = usuario.splice(id, 1, { id: id, nombre: nombre });
-    return res.status(200).json({ actualizado, msg: "Editado correctamente" });
+    return res
+      .status(201)
+      .json({ status: 201, actualizado, msg: "Editado correctamente" });
   } else {
     return res.status(404).json({ msg: "No se recibieron los datos" });
   }
@@ -57,7 +63,9 @@ const update = async (req, res) => {
 const destroy = async (req, res) => {
   const id = req.params.id;
   const eliminado = usuario.splice(id, 1);
-  return res.status(200).json({ eliminado, msg: "Eliminado correctamente" });
+  return res
+    .status(200)
+    .json({ status: 200, eliminado, msg: "Eliminado correctamente" });
 };
 
 module.exports = {
