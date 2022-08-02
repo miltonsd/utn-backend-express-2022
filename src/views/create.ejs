@@ -10,7 +10,7 @@
     <meta name="author" content="" />
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico" />
 
-    <title>Clase 3</title>
+    <title>Agregar usuario</title>
 
     <link
       rel="canonical"
@@ -24,9 +24,6 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-
-    <!-- Custom styles for this template -->
-    <link href="album.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -37,8 +34,7 @@
             <div class="col-sm-4 offset-md-1 py-4">
               <ul class="list-unstyled">
                 <li><a href="/" class="text-white">Home</a></li>
-                <li><a href="#" class="text-white">Add</a></li>
-                <li><a href="#" class="text-white">Login</a></li>
+                <li><a href="#" class="text-white">Create</a></li>
               </ul>
             </div>
           </div>
@@ -47,7 +43,7 @@
       <div class="navbar navbar-dark bg-dark box-shadow">
         <div class="container d-flex justify-content-between">
           <a href="#" class="navbar-brand d-flex align-items-center">
-            <strong>Contacto</strong>
+            <strong>Crear usuario</strong>
           </a>
           <button
             class="navbar-toggler"
@@ -65,49 +61,24 @@
     </header>
 
     <main role="main">
-      <section class="jumbotron text-center">
+      <section class="jumbotron">
         <div class="container">
           <form
             class="row g-3 needs-validation"
             method="POST"
-            action="/store"
+            action="/api/store"
             novalidate
           >
-            <div class="col-md-6">
-              <label for="name" class="form-label">Nombre</label>
+            <div class="col-md-12 py-4">
+              <label for="nombre" class="form-label">Nombre</label>
               <input
                 type="text"
                 class="form-control"
-                name="name"
-                id="name"
+                name="nombre"
+                id="nombre"
                 value=""
                 required
               />
-            </div>
-            <div class="col-md-6">
-              <label for="lastname" class="form-label">Apellido</label>
-              <input
-                type="text"
-                class="form-control"
-                name="lastname"
-                id="lastname"
-                value=""
-                required
-              />
-            </div>
-            <div class="col-md-12">
-              <label for="email" class="form-label">Usuario</label>
-              <div class="input-group has-validation">
-                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                <input
-                  type="email"
-                  class="form-control"
-                  name="email"
-                  id="email"
-                  aria-describedby="inputGroupPrepend"
-                  required
-                />
-              </div>
             </div>
             <div class="col-12">
               <button class="btn btn-primary" type="submit" id="boton">
@@ -128,29 +99,24 @@
       boton.addEventListener("click", async (e) => {
         e.preventDefault();
 
-        let name = document.getElementById("name").value;
-        let lastname = document.getElementById("lastname").value;
-        let email = document.getElementById("email").value;
+        let nombre = document.getElementById("nombre").value;
 
-        const data = await store(name, lastname, email);
+        const data = await store(nombre);
         console.log(data);
-        if (data.status == 200) {
-          alert("Usuario creado correctamente");
+        if (data) {
+          alert(data.params.nombre + " agregado correctamente");
           window.location.href = "/";
         } else {
           alert(data.error[0].msg);
         }
       });
 
-      const store = async (name, lastname, email) => {
-        console.log(name, lastname, email);
+      const store = async (nombre) => {
         try {
           const request = await fetch("http://localhost:3000/api/store", {
             method: "POST",
             body: JSON.stringify({
-              name,
-              lastname,
-              email,
+              nombre,
             }),
             headers: {
               "Content-Type": "application/json",

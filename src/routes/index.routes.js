@@ -1,10 +1,12 @@
 const Router = require("express");
 const router = Router();
 
-const { index, add } = require("../controllers/index.controller");
+const { index, create, edit } = require("../controllers/index.controller");
 
 router.get("/", index);
 
-router.get("/add", add);
+router.get("/create", create);
+
+router.get("/edit/:nombre", edit);
 
 module.exports = router;

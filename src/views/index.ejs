@@ -10,7 +10,7 @@
     <meta name="author" content="" />
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico" />
 
-    <title>Clase 3</title>
+    <title>Modulo NodeJS</title>
 
     <link
       rel="canonical"
@@ -24,9 +24,6 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-
-    <!-- Custom styles for this template -->
-    <link href="album.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -37,8 +34,7 @@
             <div class="col-sm-4 offset-md-1 py-4">
               <ul class="list-unstyled">
                 <li><a href="#" class="text-white">Home</a></li>
-                <li><a href="/add" class="text-white">Add</a></li>
-                <li><a href="#" class="text-white">Login</a></li>
+                <li><a href="/create" class="text-white">Create</a></li>
               </ul>
             </div>
           </div>
@@ -67,18 +63,22 @@
     <main role="main">
       <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">Clase 3</h1>
+          <h1 class="jumbotron-heading">Modulo de NodeJS</h1>
         </div>
       </section>
 
       <div class="album py-5 bg-light">
         <div class="container">
+          <h4>Lista de usuarios</h4>
           <div class="row">
             <% usuario.forEach(element=> { %>
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
                 <div class="card-body">
                   <p class="card-text"><%= element.nombre %></p>
+                  <a class="btn btn-primary" href="/edit/<%= element.nombre %>">
+                    Editar
+                  </a>
                 </div>
               </div>
             </div>
