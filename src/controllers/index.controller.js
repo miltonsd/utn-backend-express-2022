@@ -1,7 +1,23 @@
-const index = (req, res) => {
-  res.status(200).json({
-    nombre: "pepe",
-  });
+const index = async (req, res) => {
+  let usuario = [
+    {
+      nombre: "pepe",
+    },
+    {
+      nombre: "juan",
+    },
+    {
+      nombre: "jony",
+    },
+  ];
+  return res.render("../src/views/index", { usuario });
 };
 
-module.exports = { index };
+const add = async (req, res) => {
+  return res.render("../src/views/add");
+};
+
+module.exports = {
+  index,
+  add,
+};

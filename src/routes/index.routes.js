@@ -1,8 +1,10 @@
 const Router = require("express");
 const router = Router();
 
-const { index } = require("../controllers/index.controller");
+const { index, add } = require("../controllers/index.controller");
 
-router.get("/home", index);
+router.get("/", index);
+
+router.get("/add", add);
 
 module.exports = router;
