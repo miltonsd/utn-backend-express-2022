@@ -14,23 +14,23 @@ let usuario = [
 ];
 
 const index = async (req, res) => {
-  return res.render("../src/views/index", { usuario });
+  return res.render("../src/views/usuario/index", { usuario });
 };
 
 const show = async (req, res) => {
   const id = req.params.id;
   const elemento = usuario[id];
-  return res.render("../src/views/show", { elemento });
+  return res.render("../src/views/usuario/show", { elemento });
 };
 
 const edit = async (req, res) => {
   const id = req.params.id;
   const elemento = usuario[id];
-  return res.render("../src/views/edit", { elemento });
+  return res.render("../src/views/usuario/edit", { elemento });
 };
 
 const create = async (req, res) => {
-  return res.render("../src/views/create");
+  return res.render("../src/views/usuario/create");
 };
 
 // API
