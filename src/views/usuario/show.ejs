@@ -1,4 +1,4 @@
-<%- include('./../layouts/header.ejs', {title:elemento.nombre}) -%>
+<%- include('./../layouts/header.ejs', {title:personas.nombre}) -%>
       <section class="jumbotron">
         <div class="container">
           <div class="col-md-12 py-4">
@@ -6,12 +6,13 @@
               <label for="nombre" class="form-label">Nombre</label>
               <button class="btn btn-danger btn-sm" name="boton" id="boton">Eliminar</button>
             </div>
-            <input type="text" class="form-control" value="<%= elemento.nombre %>" readonly/>
-            <input type="hidden" name="id" id="id" value="<%= elemento.id %> "/>
+            <input type="text" class="form-control" value="<%= personas.nombre %>" readonly/>
+            <input type="text" name="edad" id="edad" value="<%= personas.edad %> "/>
+            <input type="text" name="pais" id="pais" value="<%= personas.pais %> "/>
           </div>
           <div class="row justify-content-between">
             <a href="javascript:history.back()" class="btn btn-secondary" name="boton" id="boton">Atrás</a>
-            <a href="/edit/<%= elemento.id %> " class="btn btn-primary">Editar</a>
+            <a href="/edit/<%= personas._id %> " class="btn btn-primary">Editar</a>
           </div>
         </div>
       </section>

@@ -4,8 +4,10 @@
           <form class="row g-3 needs-validation" method="POST" action="/api/store" novalidate>
             <div class="col-md-12 py-4">
               <label for="nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" name="nombre" id="nombre" value="<%= elemento.nombre %>" required/>
-              <input type="hidden" class="form-control" name="id" id="id" value="<%= elemento.id %>" required/>
+              <input type="text" class="form-control" name="nombre" id="nombre" value="<%= personas.nombre %>" required/>
+              <input type="hidden" class="form-control" name="id" id="id" value="<%= personas._id %>" required/>
+              <input type="text" class="form-control" name="edad" id="edad" value="<%= personas.edad %>" required/>
+              <input type="text" class="form-control" name="pais" id="pais" value="<%= personas.pais %>" required/>
             </div>
             <div class="col-12">
               <div class="row justify-content-between">
@@ -27,8 +29,10 @@
       boton.addEventListener("click", async (e) => {
         e.preventDefault();
 
-        let nombre = document.getElementById("nombre").value;
         let id = document.getElementById("id").value;
+        let nombre = document.getElementById("nombre").value;
+        let edad = document.getElementById("edad").value;
+        let pais = document.getElementById("pais").value;
 
         const data = await update(id, nombre, edad, pais);
         console.log(data);
@@ -46,6 +50,8 @@
             method: "PATCH",
             body: JSON.stringify({
               nombre,
+              edad,
+              pais
             }),
             headers: {
               "Content-Type": "application/json",

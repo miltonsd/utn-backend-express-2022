@@ -14,18 +14,20 @@
             <table class="table table-responsive table-hover text-center">
               <thead>
                 <tr>
-                  <th>Id</th>
                   <th>Nombre</th>
+                  <th>Edad</th>
+                  <th>Pais</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <% usuario.forEach(element => { %>
+                <% personas.forEach(persona => { %>
                 <tr>
-                  <td><%= element.id %></td>
-                  <td><%= element.nombre %></td>
+                  <td><%= persona.nombre %></td>
+                  <td><%= persona.edad %></td>
+                  <td><%= persona.pais %></td>
                   <td>
-                    <a class="btn btn-primary" href="/show/<%= element.id %>">Ver detalles</a>
+                    <a class="btn btn-primary" href="/show/<%= persona._id %>">Ver detalles</a>
                   </td>
                 </tr>
                 <% }); %>
