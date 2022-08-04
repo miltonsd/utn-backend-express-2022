@@ -15,23 +15,18 @@ const index = async (req, res) => {
 
 const show = async (req, res) => {
   const id = req.params.id;
-  const personas = await PersonaModel.find({ _id: id });
-  return res.render("../src/views/usuario/show", { personas });
+  const persona = await PersonaModel.findOne({ _id: id });
+  return res.render("../src/views/usuario/show", { persona });
 };
 
 const edit = async (req, res) => {
   const id = req.params.id;
-  const personas = await PersonaModel.find({ _id: id });
-  return res.render("../src/views/usuario/edit", { personas });
+  const persona = await PersonaModel.findOne({ _id: id });
+  return res.render("../src/views/usuario/edit", { persona });
 };
 
 const create = async (req, res) => {
-  const persona = new PersonaModel({
-    nombre: nombre,
-    edad: edad,
-    pais: pais,
-  });
-  return res.render("../src/views/usuario/create", { persona });
+  return res.render("../src/views/usuario/create");
 };
 
 // API
@@ -43,10 +38,11 @@ const store = async (req, res) => {
     edad: edad,
     pais: pais,
   });
-  if (persona) {
+  const stored = await persona.save();
+  if (stored) {
     return res
       .status(200)
-      .json({ status: 200, msg: "Creado correctamente", persona });
+      .json({ status: 200, msg: "Creado correctamente", stored });
   } else {
     return res.status(404).json({ msg: "No se recibieron los datos" });
   }
@@ -58,10 +54,10 @@ const update = async (req, res) => {
   const persona = await PersonaModel.updateOne(
     { _id: id },
     {
-      $set: { nombre: nombre, edad: edad, pais: pais },
+      $set: { nombre, edad, pais },
     }
   );
-  if (id) {
+  if (persona) {
     return res
       .status(201)
       .json({ status: 201, persona, msg: "Editado correctamente" });
@@ -72,7 +68,7 @@ const update = async (req, res) => {
 
 const destroy = async (req, res) => {
   const id = req.params.id;
-  const persona = PersonaModel.deleteOne({ _id: id });
+  const persona = await PersonaModel.deleteOne({ _id: id });
   return res
     .status(200)
     .json({ status: 200, persona, msg: "Eliminado correctamente" });

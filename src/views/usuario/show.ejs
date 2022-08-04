@@ -1,18 +1,23 @@
-<%- include('./../layouts/header.ejs', {title:personas.nombre}) -%>
+<%- include('./../layouts/header.ejs', {title:persona.nombre}) -%>
       <section class="jumbotron">
         <div class="container">
+          <a href="/edit/<%= persona._id %> " class="btn btn-primary">Editar</a>
+          <input type="hidden" class="form-control" id="id" value="<%= persona._id %>"/>
           <div class="col-md-12 py-4">
-            <div class="row justify-content-between">
-              <label for="nombre" class="form-label">Nombre</label>
-              <button class="btn btn-danger btn-sm" name="boton" id="boton">Eliminar</button>
-            </div>
-            <input type="text" class="form-control" value="<%= personas.nombre %>" readonly/>
-            <input type="text" name="edad" id="edad" value="<%= personas.edad %> "/>
-            <input type="text" name="pais" id="pais" value="<%= personas.pais %> "/>
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" value="<%= persona.nombre %>" readonly/>
+          </div>
+          <div class="col-md-12 py-4">
+            <label for="edad" class="form-label">Edad</label>
+            <input type="text" class="form-control" name="edad" id="edad" value="<%= persona.edad %> " readonly/>
+          </div>
+          <div class="col-md-12 py-4">
+            <label for="pais" class="form-label">País</label>
+            <input type="text" class="form-control" name="pais" id="pais" value="<%= persona.pais %> " readonly/>
           </div>
           <div class="row justify-content-between">
-            <a href="javascript:history.back()" class="btn btn-secondary" name="boton" id="boton">Atrás</a>
-            <a href="/edit/<%= personas._id %> " class="btn btn-primary">Editar</a>
+            <a href="javascript:history.back()" class="btn btn-secondary">Atrás</a>
+            <button class="btn btn-danger btn-sm" name="eliminar" id="eliminar">Eliminar</button>
           </div>
         </div>
       </section>
@@ -22,17 +27,18 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script>
-      const $boton = document.getElementById("boton");
+      const $eliminar = document.getElementById("eliminar");
 
-      boton.addEventListener("click", async (e) => {
+      eliminar.addEventListener("click", async (e) => {
         e.preventDefault();
 
         let id = document.getElementById("id").value;
+        let nombre = document.getElementById("nombre").value;
 
         const data = await destroy(id);
         console.log(data);
         if (data.status == 200) {
-          alert(data.eliminado[0].nombre + " eliminado correctamente");
+          alert(nombre + " eliminado correctamente");
           window.location.href = "/";
         } else {
           alert(data.error[0].msg);

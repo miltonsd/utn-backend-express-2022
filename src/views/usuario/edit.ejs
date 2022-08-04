@@ -1,21 +1,25 @@
 <%- include('./../layouts/header.ejs', {title:'Editar usuario'}) -%>
       <section class="jumbotron">
         <div class="container">
-          <form class="row g-3 needs-validation" method="POST" action="/api/store" novalidate>
-            <div class="col-md-12 py-4">
-              <label for="nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" name="nombre" id="nombre" value="<%= personas.nombre %>" required/>
-              <input type="hidden" class="form-control" name="id" id="id" value="<%= personas._id %>" required/>
-              <input type="text" class="form-control" name="edad" id="edad" value="<%= personas.edad %>" required/>
-              <input type="text" class="form-control" name="pais" id="pais" value="<%= personas.pais %>" required/>
+          <input type="hidden" class="form-control" name="id" id="id" value="<%= persona._id %>"/>
+          <div class="col-md-12 py-4">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" value="<%= persona.nombre %>" required/>
+          </div>
+          <div class="col-md-12 py-4">
+            <label for="edad" class="form-label">Edad</label>
+            <input type="text" class="form-control" name="edad" id="edad" value="<%= persona.edad %> " required/>
+          </div>
+          <div class="col-md-12 py-4">
+            <label for="pais" class="form-label">País</label>
+            <input type="text" class="form-control" name="pais" id="pais" value="<%= persona.pais %> " required/>
+          </div>
+          <div class="col-12">
+            <div class="row justify-content-between">
+              <a href="javascript:history.back()" class="btn btn-secondary">Atrás</a>
+              <button class="btn btn-primary" type="submit" id="boton">Enviar</button>
             </div>
-            <div class="col-12">
-              <div class="row justify-content-between">
-                <a href="javascript:history.back()" class="btn btn-secondary" name="boton" id="boton">Atrás</a>
-                <button class="btn btn-primary" type="submit" id="boton">Enviar</button>
-              </div>
-            </div>
-          </form>
+          </div>
         </div>
       </section>
     </main>
@@ -37,7 +41,7 @@
         const data = await update(id, nombre, edad, pais);
         console.log(data);
         if (data.status == 201) {
-          alert(data.actualizado.nombre + " agregado correctamente");
+          alert(nombre + " agregado correctamente");
           window.location.href = "/";
         } else {
           alert(data.error[0].msg);
